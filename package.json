@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-        "backend": "nodemon backend/index.js",
-        "frontend": "npm run dev --prefix frontend",
-        "dev": "concurrently \"npm run frontend\" \"npm run backend\""    
+    "backend": "nodemon backend/index.js",
+    "frontend": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "keywords": [],
   "author": "",
@@ -14,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
     "cookieparser": "^0.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

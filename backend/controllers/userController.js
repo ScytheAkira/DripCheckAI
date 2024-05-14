@@ -1,0 +1,78 @@
+import User from "../models/userModel.js";
+import asyncHandler from "../middlewares/asyncHandler.js";
+import bcrypt from 'bcryptjs';
+import generateTokken from '../utils/createToken.js';
+import expressAsyncHandler from "express-async-handler";
+
+
+
+
+const createUser = asyncHandler(async(req, res)=>
+{
+    const{username, email, password} = req.body;
+    if(
+        !username ||
+        !email ||
+        !password
+    ){
+        throw new Error("Please fill all the inputs: username, email and password! ");
+    }
+
+    const userExists = await User.findOne({email});
+
+    if (userExists) res.status(400).send("A user already exists with this email.");
+
+
+    const salt = await bcrypt.genSalt(10);
+
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+
+    const newUser = new User({username,email,password: hashedPassword});
+    try {
+        await newUser.save()  
+        generateTokken(res, newUser._id);
+        res.status(201).json({_id: newUser._id, username: newUser.username, email: newUser.email, isAdmin: newUser.isAdmin})
+        // res.status(201).send(newUser); /we use the above statement so that the password and timestamps dont get shown
+    } catch (error) {
+        res.status(400)
+        throw new Error("invalid User Data")
+    }
+})
+
+
+const loginUser = asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+        const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+
+        if (isPasswordValid) {
+            generateTokken(res, existingUser._id);
+            res.status(201).json({
+                _id: existingUser._id,
+                username: existingUser.username,
+                email: existingUser.email,
+                isAdmin: existingUser.isAdmin
+            });
+        } else {
+            // Send error response for invalid password
+            res.status(401).json({ message: "Invalid email or password" });
+        }
+    } else {
+        // Send error response for non-existing email
+        res.status(404).json({ message: "User not found" });
+    }
+});
+
+const logoutCurrentUser = asyncHandler (async(req, res) =>{
+    res.cookie('jwt', '',{
+            httpOnly: true,
+            expires: new Date(0)
+        }
+    )
+    res.status(200).json({message:"logged out successfuly! " });
+})
+export{createUser, loginUser, logoutCurrentUser};
