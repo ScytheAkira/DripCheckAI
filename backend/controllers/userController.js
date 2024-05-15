@@ -1,7 +1,7 @@
 import User from "../models/userModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from 'bcryptjs';
-import generateTokken from '../utils/createToken.js';
+import generateToken from '../utils/createToken.js';
 import expressAsyncHandler from "express-async-handler";
 
 
@@ -31,7 +31,7 @@ const createUser = asyncHandler(async(req, res)=>
     const newUser = new User({username,email,password: hashedPassword});
     try {
         await newUser.save()  
-        generateTokken(res, newUser._id);
+        generateToken(res, newUser._id);
         res.status(201).json({_id: newUser._id, username: newUser.username, email: newUser.email, isAdmin: newUser.isAdmin})
         // res.status(201).send(newUser); /we use the above statement so that the password and timestamps dont get shown
     } catch (error) {
@@ -50,7 +50,7 @@ const loginUser = asyncHandler(async (req, res) => {
         const isPasswordValid = await bcrypt.compare(password, existingUser.password);
 
         if (isPasswordValid) {
-            generateTokken(res, existingUser._id);
+            generateToken(res, existingUser._id);
             res.status(201).json({
                 _id: existingUser._id,
                 username: existingUser.username,
