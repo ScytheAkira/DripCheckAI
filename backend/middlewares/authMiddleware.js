@@ -6,14 +6,15 @@ const authenticate = asyncHandler (async(req, res, next) => {
     let token;
 
     //read jwt from jwt cookie
-    token = req.cookie.jwt;
+    token = req.cookies.jwt;
 
     //check if token is valid
     if(token){
         try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-            req.user = await User.findById(decoded.userId).select("=password");
+            req.user = await User.findById(decoded.userId).select("-password");
+            // console.log('authenticated');
             next();
         } catch (error) {
             throw new Error("Not authorized. token failed")
@@ -33,4 +34,8 @@ const authorizeAdmin = (req,res,next) => {
         res.status(401).send("Not authorized as an admin");
     }
 }
+
+
 export {authenticate, authorizeAdmin}
+
+
