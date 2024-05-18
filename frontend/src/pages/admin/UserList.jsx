@@ -9,7 +9,7 @@ import {
 } from "../../redux/api/usersApiSlice";
 import { toast } from "react-toastify";
 // ⚠️⚠️⚠️ don't forget this ⚠️⚠️⚠️⚠️
-// import AdminMenu from "./AdminMenu";
+import AdminMenu from "./AdminMenu";
 
 const UserList = () => {
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
@@ -58,20 +58,21 @@ const UserList = () => {
   };
 
   return (
-    <div className="p-4  text-primary-content">
-        <div className="text-2xl font-semibold mb-4 text-primary-content flex items-center justify-center"><p>Users</p></div>
+    <div className="p-4 text-primary-content">
+      <AdminMenu />
+      <div className="text-2xl font-semibold mb-4 text-primary-content flex items-center justify-center">
+        <p>Users</p>
+      </div>
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">
-          {error?.data?.message || error.error}
-        </Message>
+        <Message variant="danger">{error?.data?.message || error.error}</Message>
       ) : (
         <div className="flex flex-col md:flex-row">
           {/* <AdminMenu /> */}
           <table className="w-full md:w-4/5 mx-auto">
             <thead>
-              <tr>
+              <tr className="bg-secondary">
                 <th className="px-4 py-2 text-left">ID</th>
                 <th className="px-4 py-2 text-left">NAME</th>
                 <th className="px-4 py-2 text-left">EMAIL</th>
@@ -80,8 +81,8 @@ const UserList = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user._id}>
+              {users.map((user, index) => (
+                <tr key={user._id} className={index % 2 === 0 ? 'bg-primary' : 'bg-neutral'}>
                   <td className="px-4 py-2">{user._id}</td>
                   <td className="px-4 py-2">
                     {editableUserId === user._id ? (
@@ -101,13 +102,13 @@ const UserList = () => {
                       </div>
                     ) : (
                       <div className="flex items-center">
-                        {user.username}{" "}
+                        {user.username}
                         <button
                           onClick={() =>
                             toggleEdit(user._id, user.username, user.email)
                           }
                         >
-                          <FaEdit className="ml-[1rem] hover:text-secondary" />
+                          <FaEdit className="ml-[1rem] hover:text-pink-500" />
                         </button>
                       </div>
                     )}
@@ -130,13 +131,13 @@ const UserList = () => {
                       </div>
                     ) : (
                       <div className="flex items-center">
-                        <a href={`mailto:${user.email}`}>{user.email}</a>{" "}
+                        <a href={`mailto:${user.email}`}>{user.email}</a>
                         <button
                           onClick={() =>
-                            toggleEdit(user._id, user.name, user.email)
+                            toggleEdit(user._id, user.username, user.email)
                           }
                         >
-                          <FaEdit className="ml-[1rem] hover:text-secondary" />
+                          <FaEdit className="ml-[1rem] hover:text-pink-500" />
                         </button>
                       </div>
                     )}

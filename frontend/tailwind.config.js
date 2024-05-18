@@ -24,6 +24,7 @@ export default {
           primary: "#1A1A1B",
           secondary: "#29A19C",
           "primary-content": "#FFFFFF",
+          "secondary-content": "#FFFFFF",
           accent: "#94F3E4",
           neutral: "#333F44",
           "--rounded-box": "1rem",
