@@ -8,14 +8,13 @@ function App() {
 
   return (
     <>
+      <div className="min-h-screen bg-primary">
       <ToastContainer />
       <Navigation />
-      <main className='py-3'>
+      <main className="py-3">
         <Outlet />
-
       </main>
-    
-    
+      </div>
     
     
     </>
