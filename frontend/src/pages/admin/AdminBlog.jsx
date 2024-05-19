@@ -16,10 +16,10 @@ const AdminBlog = () => {
         </div>
         <h2 className="text-2xl font-semibold">Ikram Ul Haq</h2>
         <div className="flex space-x-4 mt-2">
-          <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.linkedin.com/in/ikram-ul-haq-023a61218/" target="_blank" rel="noopener noreferrer">
             <FaLinkedin className="text-3xl text-accent hover:text-pink-500 transition-all duration-300" />
           </a>
-          <a href="https://github.com/your-github" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/ScytheAkira" target="_blank" rel="noopener noreferrer">
             <FaGithub className="text-3xl text-accent hover:text-pink-500 transition-all duration-300" />
           </a>
         </div>
