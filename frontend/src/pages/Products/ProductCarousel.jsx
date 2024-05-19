@@ -141,8 +141,8 @@ const ProductCarousel = ({ products }) => {
                 <div id={`slide${index + 1}`} className="carousel-item relative flex justify-center w-full h-full" key={product.id}>
                     <CarouselProduct product={product} />
                     <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <a href={`#slide${index === 0 ? products.length : index}`} className="btn btn-circle btn-accent">❮</a>
-                        <a href={`#slide${(index + 1) % products.length + 1}`} className="btn btn-circle btn-accent">❯</a>
+                        <a href={`#slide${index === 0 ? products.length : index}`} className="btn btn-circle btn-accent glass text-pink-500">❮</a>
+                        <a href={`#slide${(index + 1) % products.length + 1}`} className="btn btn-circle btn-accent glass text-pink-500">❯</a>
                     </div>
                 </div>
             ))}

@@ -9,13 +9,15 @@ const CarouselProduct = ({ product }) => {
     };
 
     return (
-        <div className="bg-neutral shadow-xl text-neutral-content w-fit">
-            <div className="w-96">
+        <div className="bg-neutral text-neutral-content w-fit">
+            <div className="avatar w-96">
+                {/* <div className="w-full rounded-full"> */}
                 <img
                     src={product.image_url}
                     alt={product.image_filename}
-                    className="rounded-t-xl w-full"
+                    className=" w-full rounded-full"
                 />
+                {/* </div> */}
             </div>
             <div className="p-4">
                 <h2 className="text-lg font-semibold mb-2">{truncateName(product.productDisplayName, 20)}</h2>
