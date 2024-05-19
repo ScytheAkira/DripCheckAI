@@ -167,7 +167,7 @@ const fetchProducts = asyncHandler(async (req, res) => {
 
   const fetchNewProducts = asyncHandler(async (req, res) => {
     try {
-      const products = await Product.find().sort({ _id: -1 }).limit(5);
+      const products = await Product.find().sort({ _id: -1 }).limit(4);
       res.json(products);
     } catch (error) {
       console.error(error);
@@ -180,7 +180,8 @@ const fetchProducts = asyncHandler(async (req, res) => {
       const { checked, radio } = req.body;
   
       let args = {};
-      if (checked.length > 0) args.category = checked;
+      if (checked.length > 0) args.mastercategory = checked;
+      if (checked.length > 0) args.subcategory = checked;
       if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
   
       const products = await Product.find(args);
@@ -196,5 +197,6 @@ export{ addProduct,
     fetchProducts,
     fetchProductById,
     fetchAllProducts,
-    fetchNewProducts
+    fetchNewProducts,
+    filterProducts
  };

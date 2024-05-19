@@ -11,6 +11,7 @@ import { addProduct,
     fetchProductById,
     fetchAllProducts,
     fetchNewProducts,
+    filterProducts
 } from "../controllers/productController.js";
 
 // Import middleware
@@ -33,4 +34,8 @@ router
     .get(fetchProductById)
     .put(authenticate, authorizeAdmin, formidableMiddleware(), updateProductDetails)
     .delete(authenticate, authorizeAdmin, removeProduct)
+
+    router
+        .route('/filtered-products')
+        .post(filterProducts);
 export default router;

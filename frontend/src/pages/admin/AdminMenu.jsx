@@ -21,33 +21,33 @@ const AdminMenu = () => {
           <FaTimes color="white" />
         ) : (
           <>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
-            <div className="w-6 h-0.5 bg-gray-200 my-1"></div>
+            <div className="w-6 h-0.5 bg-accent my-1"></div>
+            <div className="w-6 h-0.5 bg-accent my-1"></div>
+            <div className="w-6 h-0.5 bg-accent my-1"></div>
           </>
         )}
       </button>
 
       {isMenuOpen && (
-        <section className="bg-[#151515] p-4 fixed right-7 top-5">
+        <section className="bg-neutral p-4 fixed right-7 top-5">
           <ul className="list-none mt-2">
             <li>
               <NavLink
-                className="list-item py-2 px-3 block mb-5 hover:bg-[#2E2D2D] rounded-sm"
-                to="/admin/dashboard"
+                className="list-item py-2 px-3 block mb-5 hover:bg-secondary rounded-sm"
+                to="/admin/blog"
                 style={({ isActive }) => ({
-                  color: isActive ? "greenyellow" : "white",
+                  color: isActive ? "pink" : "white",
                 })}
               >
-                Admin Dashboard
+                Admin Blog
               </NavLink>
             </li>
             <li>
               <NavLink
-                className="list-item py-2 px-3 block mb-5 hover:bg-[#2E2D2D] rounded-sm"
+                className="list-item py-2 px-3 block mb-5 hover:bg-secondary rounded-sm"
                 to="/admin/categorylist"
                 style={({ isActive }) => ({
-                  color: isActive ? "greenyellow" : "white",
+                  color: isActive ? "pink" : "white",
                 })}
               >
                 Create Category
@@ -55,10 +55,10 @@ const AdminMenu = () => {
             </li>
             <li>
               <NavLink
-                className="list-item py-2 px-3 block mb-5 hover:bg-[#2E2D2D] rounded-sm"
+                className="list-item py-2 px-3 block mb-5 hover:bg-secondary rounded-sm"
                 to="/admin/productlist"
                 style={({ isActive }) => ({
-                  color: isActive ? "greenyellow" : "white",
+                  color: isActive ? "pink" : "white",
                 })}
               >
                 Create Product
@@ -66,10 +66,10 @@ const AdminMenu = () => {
             </li>
             <li>
               <NavLink
-                className="list-item py-2 px-3 block mb-5 hover:bg-[#2E2D2D] rounded-sm"
+                className="list-item py-2 px-3 block mb-5 hover:bg-secondary rounded-sm"
                 to="/admin/allproductslist"
                 style={({ isActive }) => ({
-                  color: isActive ? "greenyellow" : "white",
+                  color: isActive ? "pink" : "white",
                 })}
               >
                 All Products
@@ -77,10 +77,10 @@ const AdminMenu = () => {
             </li>
             <li>
               <NavLink
-                className="list-item py-2 px-3 block mb-5 hover:bg-[#2E2D2D] rounded-sm"
+                className="list-item py-2 px-3 block mb-5 hover:bg-secondary rounded-sm"
                 to="/admin/userlist"
                 style={({ isActive }) => ({
-                  color: isActive ? "greenyellow" : "white",
+                  color: isActive ? "pink" : "white",
                 })}
               >
                 Manage Users
@@ -88,10 +88,10 @@ const AdminMenu = () => {
             </li>
             <li>
               <NavLink
-                className="list-item py-2 px-3 block mb-5 hover:bg-[#2E2D2D] rounded-sm"
+                className="list-item py-2 px-3 block mb-5 hover:bg-secondary rounded-sm"
                 to="/admin/orderlist"
                 style={({ isActive }) => ({
-                  color: isActive ? "greenyellow" : "white",
+                  color: isActive ? "pink" : "white",
                 })}
               >
                 Manage Orders
