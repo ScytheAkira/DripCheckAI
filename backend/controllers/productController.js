@@ -175,22 +175,35 @@ const fetchProducts = asyncHandler(async (req, res) => {
     }
   });
 
-  const filterProducts = asyncHandler(async (req, res) => {
-    try {
-      const { checked, radio } = req.body;
-  
-      let args = {};
-      if (checked.length > 0) args.mastercategory = checked;
-      if (checked.length > 0) args.subcategory = checked;
-      if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
-  
-      const products = await Product.find(args);
-      res.json(products);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Server Error" });
+const filterProducts = asyncHandler(async (req, res) => {
+  try {
+    const { checked, radio, priceFilter } = req.body;
+
+    const query = {};
+
+    // Filter by checked categories
+    if (checked.length > 0) {
+      query.subCategory = { $in: checked };
     }
-  });
+
+    // Filter by radio (brands)
+    if (radio.length > 0) {
+      query.brandname = { $in: radio };
+    }
+
+    // Filter by price
+    if (priceFilter) {
+      query.price = { $regex: new RegExp(priceFilter, 'i') };
+    }
+
+    const products = await Product.find(query);
+    res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 export{ addProduct, 
     updateProductDetails,
     removeProduct,
